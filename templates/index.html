@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <!--Header Struncture-->
+    <div class="header">
+        <h1>Text Summerizer</h1>
+    </div>
+
+    <!--Body Structure-->
+    <div class="content">
+        <!--Input Form-->
+        <h3>Enter a Text Content</h3>
+        <div class="form">
+            <form action="/" method="post">
+                <div class="formitem">
+                    <label>Your Text Content</label>
+                    <textarea name="text" cols="50" rows="15"></textarea>
+                </div>
+
+                <div class="formitem" style="flex-direction: row;">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+        
+        <!--Output Section-->
+        <h3>Output</h3>
+        <div class="output">
+            <div class="outputsection" id="leftsection">
+                <h2>Main Text</h2>
+                {% if text is none %}
+                    No Input yet!
+                {% else %}
+                    {% for sent in text %}
+                        <p>{{ sent }}</p>
+                    {% endfor %}
+                    <hr>
+                    <p>Word Count: {{text_len}}</p>
+                {% endif %}
+            </div>
+
+            <div class="outputsection" id="rightsection">
+                <h2>Summary</h2>
+                {% if text is none %}
+                    No Input yet!
+                {% else %}
+                    <p>{{ summ }}</p>
+                    <hr>
+                    <p>Word Count: {{summ_len}} ({{ red_perc }}% reduced)</p>
+                {% endif %}
+            </div>
+        </div>
+</body>
+</html>
